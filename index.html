@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NSD 服务器 · 赞助支持</title>
+<meta name="description" content="NSD 我的世界服务器赞助页：普通套餐 5 元、高级套餐 20 元、至尊套餐 50 元，一次付费长期有效，支持自定义称号、群称号、尼克权限与内测体验。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-grid"></div>
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
+
+<!-- 顶部公告 -->
+<div class="notice-bar" id="noticeBar" hidden>
+  <span class="notice-dot"></span>
+  <div class="notice-track"><span id="noticeText"></span></div>
+  <button class="notice-close" id="noticeClose" aria-label="关闭公告">×</button>
+</div>
+
+<!-- 导航 -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="brand-mark">N</span>
+    <span class="brand-text" id="brandText">NSD 服务器</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#tiers">套餐</a>
+    <a href="#compare">对比</a>
+    <a href="#steps">流程</a>
+    <a href="#faq">常见问题</a>
+  </nav>
+  <button class="btn btn-gold btn-sm" data-pay="pro">立即赞助</button>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag reveal">MINECRAFT · SERVER SPONSOR</div>
+      <h1 class="hero-title reveal">
+        赞助 <span class="gold" id="heroServer">NSD 服务器</span><br />
+        <span class="hero-sub" id="heroSlogan">你的每一份支持，都会变成服务器的一格区块</span>
+      </h1>
+      <p class="hero-desc reveal">
+        一次付费，长期有效。称号、昵称、内测资格 —— 用最轻的方式换来最显眼的存在感。
+        服务器无任何影响平衡的付费数值，所有赞助仅用于服务器运维与更新。
+      </p>
+
+      <div class="hero-actions reveal">
+        <button class="btn btn-gold" data-pay="pro">立即赞助</button>
+        <a class="btn btn-ghost" href="#tiers">查看套餐</a>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="stat"><b>3</b><span>档套餐</span></div>
+        <div class="stat"><b>¥5</b><span>起步价格</span></div>
+        <div class="stat"><b>24h</b><span>内开通</span></div>
+        <div class="stat"><b>0</b><span>付费数值</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 套餐 -->
+  <section class="section" id="tiers">
+    <div class="section-head reveal">
+      <h2>赞助套餐</h2>
+      <p>三档可选，均可自由升级（补差价即可）</p>
+    </div>
+    <div class="tiers" id="tiersGrid"></div>
+    <p class="tiers-note reveal">所有价格为一次性付费，长期有效，不自动续费。</p>
+  </section>
+
+  <!-- 对比 -->
+  <section class="section" id="compare">
+    <div class="section-head reveal">
+      <h2>套餐对比</h2>
+      <p>一张表看清差别</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare-table" id="compareTable"></table>
+    </div>
+  </section>
+
+  <!-- 流程 -->
+  <section class="section" id="steps">
+    <div class="section-head reveal">
+      <h2>赞助流程</h2>
+      <p>四步完成，正常 24 小时内生效</p>
+    </div>
+    <ol class="steps" id="stepsList"></ol>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-head reveal">
+      <h2>常见问题</h2>
+      <p>还有疑问？在群里找管理员就行</p>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </section>
+
+  <!-- 赞助者名单 -->
+  <section class="section" id="sponsors" hidden>
+    <div class="section-head reveal">
+      <h2>感谢赞助者</h2>
+      <p>名字会一直留在这里</p>
+    </div>
+    <div class="sponsor-list" id="sponsorList"></div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="cta-card reveal">
+      <h2>准备好了吗？</h2>
+      <p>选一个套餐，扫码赞助，然后去群里喊一声 —— 称号马上就到。</p>
+      <button class="btn btn-gold" data-pay="pro">立即赞助</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark">N</span>
+      <div>
+        <strong id="footerServer">NSD 服务器</strong>
+        <p id="footerNote">本页为玩家自愿赞助页面，与 Mojang / Microsoft 无关。</p>
+      </div>
+    </div>
+    <div class="footer-links" id="footerLinks"></div>
+  </div>
+  <div class="footer-bottom">© <span id="year"></span> NSD 服务器 · 感谢每一位赞助者</div>
+</footer>
+
+<!-- 支付弹窗 -->
+<div class="modal" id="payModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="payTitle">
+    <button class="modal-close" data-close aria-label="关闭">×</button>
+    <div class="modal-head">
+      <span class="modal-icon" id="payIcon">💎</span>
+      <div>
+        <h3 id="payTitle">高级套餐</h3>
+        <p id="payPrice" class="modal-price">¥20</p>
+      </div>
+    </div>
+
+    <div class="qr-box">
+      <img id="payQr" alt="赞助收款二维码" />
+      <div class="qr-glow"></div>
+    </div>
+    <p class="qr-label" id="payQrLabel">扫码赞助 · 微信 / 支付宝</p>
+
+    <ul class="pay-tips" id="payTips"></ul>
+
+    <div class="copy-row">
+      <span>付款备注：</span>
+      <code id="payMemo">游戏ID + 套餐名</code>
+      <button class="btn btn-ghost btn-xs" id="copyMemo">复制</button>
+    </div>
+
+    <button class="btn btn-gold btn-block" data-close>我已付款</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

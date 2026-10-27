@@ -1,0 +1,41 @@
+# Netlify 部署配置
+# 纯静态站点：无构建步骤，直接发布根目录
+
+[build]
+  publish = "."
+
+# 安全响应头
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# 静态资源长缓存（data.js / main.js / styles.css 改动后靠文件名不变，
+# 这里给 HTML 单独设短缓存，避免改完内容用户看不到）
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# 404 兜底（单页站点，全部回到首页）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
