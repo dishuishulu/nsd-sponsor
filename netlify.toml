@@ -33,9 +33,3 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=86400"
-
-# 404 兜底（单页站点，全部回到首页）
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
